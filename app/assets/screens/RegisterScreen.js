@@ -14,7 +14,7 @@ function RegisterScreen(props) {
 	const [password, setPassword] = useState(null);
 	const [phoneNumber, setPhoneNumber] = useState(null);
 
-	const { signIn } = useContext(AuthContext);
+	const { signUp } = useContext(AuthContext);
 
 	return (
 		<View style={styles.baseBackground}>
@@ -43,17 +43,13 @@ function RegisterScreen(props) {
 					value={password}
 					placeholder='Password'
 				/>
-				{/* button for logging in */}
+				{/* container for the register button */}
 				<TouchableOpacity
 					style={styles.loginButton}
 					onPress={() => {
-						signIn({ username, password });
+						signUp({ username, password, phoneNumber });
 					}}
 				>
-					<Text style={styles.textLocation}>Login</Text>
-				</TouchableOpacity>
-				{/* container for the register button */}
-				<TouchableOpacity style={styles.registerButton}>
 					<Text style={styles.textLocation}>Register</Text>
 				</TouchableOpacity>
 			</View>

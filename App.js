@@ -89,13 +89,37 @@ export default function App() {
 				});
 			},
 			signUp: async (data) => {
+				let token = null;
+
 				// send user data to server and get token
-				// handle errors
+				try {
+					const res = await axios.post('auth/register', {
+						username: data.username,
+						password: data.password,
+						phoneNumber: data.phoneNumber,
+					});
+					if (res.data.status != 'success') {
+						return;
+					}
+
+					// FIXME: i don't understand why accessToken needs to be there twice
+					token = res.data.accessToken.accessToken;
+				} catch (err) {
+					console.log(err);
+					return;
+				}
+
 				// persist token using securestore
+				try {
+					await SecureStore.setItemAsync('userToken', token);
+				} catch (err) {
+					console.log(err);
+					return;
+				}
 
 				dispatch({
 					type: 'SIGN_IN',
-					token: 'sample_token',
+					token: token,
 				});
 			},
 		}),
