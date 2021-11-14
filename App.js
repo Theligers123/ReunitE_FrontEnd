@@ -4,7 +4,7 @@ import Profile from './app/assets/screens/Profile';
 
 export default function App() {
     return (
-      // <Profile/>
-       <WelcomeScreen/>
+       <Profile/>
+      // <WelcomeScreen/>
     );
   }

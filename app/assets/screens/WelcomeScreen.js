@@ -6,7 +6,7 @@ function WelcomeScreen(props) {
     return (
         <View style={styles.baseBackground}>
             {/* Text for the title of the app */}
-            <Image source = {require('C:/Users/User/ReunitE/app/assets/ReunitE1.png')} 
+            <Image source = {require('../ReunitE1.png')} 
             style = {styles.pic}/>
              {/* container for the log in contents */}
             <View style = {styles.loginContainer}>
