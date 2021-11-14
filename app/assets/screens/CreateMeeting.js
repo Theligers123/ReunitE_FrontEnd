@@ -1,4 +1,3 @@
-import React, {useState} from 'react';
 import { ImageBackground, StyleSheet, View, TouchableOpacity, 
     Text, TextInput, Image, ScrollView, Button, Platform} from 'react-native';
 
@@ -8,10 +7,28 @@ import { AntDesign, FontAwesome, Ionicons,
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react';
+import * as ImagePicker from 'expo-image-picker';
 
 
 
 function CreateMeeting(props) {
+    const [image, setImage] = useState(null);
+    const addImage = async () => {
+    let _image = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4,3],
+      quality: 1,
+    });
+
+    console.log(JSON.stringify(_image));
+
+    if (!_image.cancelled) {
+      setImage(_image.uri);
+    }
+  };
+
     // section for setting up date and time logic
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
@@ -42,9 +59,20 @@ function CreateMeeting(props) {
             <View style={styles.baseBackground}>
 
                 {/* Select Image */}
-                <View style = {styles.imageContainer}>
-                    <AntDesign name="picture" size={65} color="black" />
-                </View>
+                <View style={imageUploaderStyles.container}>
+                {
+                    image  && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+                }
+                    
+                    <View style={imageUploaderStyles.uploadBtnContainer}>
+                        <TouchableOpacity onPress={addImage} style={imageUploaderStyles.uploadBtn} >
+                            <Text>{image ? 'Edit' : 'Upload'} Image</Text>
+                            <AntDesign name="camera" size={20} color="black" />
+                        </TouchableOpacity>
+                    </View>
+              
+
+            </View>
 
                 {/* name of the event */}
                 <View style = {styles.nameContainer}>
@@ -104,6 +132,32 @@ function CreateMeeting(props) {
         </ScrollView>        
     );
 }
+
+const imageUploaderStyles=StyleSheet.create({
+    container:{
+        elevation:2,
+        height:200,
+        width:200, 
+        backgroundColor:'#efefef',
+        position:'relative',
+        borderRadius:999,
+        overflow:'hidden',
+    },
+    uploadBtnContainer:{
+        opacity:0.7,
+        position:'absolute',
+        right:0,
+        bottom:0,
+        backgroundColor:'lightgrey',
+        width:'100%',
+        height:'25%',
+    },
+    uploadBtn:{
+        display:'flex',
+        alignItems:"center",
+        justifyContent:'center'
+    }
+})
 
 const styles = StyleSheet.create({
     baseBackground:
@@ -236,7 +290,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 100,
         shadowRadius: 5,
         elevation: 100,
-        top: 20
+        top: 40
     },
     textLocation:
     {

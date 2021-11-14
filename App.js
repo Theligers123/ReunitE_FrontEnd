@@ -7,9 +7,9 @@ import UploadImage from './app/assets/screens/UploadImage';
 
 export default function App() {
     return (
-      <Profile/>
+      //<Profile/>
       //<WelcomeScreen/>
-      //<CreateMeeting/>
+      <CreateMeeting/>
       //<UploadImage/>
     );
   }
