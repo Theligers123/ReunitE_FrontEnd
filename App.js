@@ -5,6 +5,8 @@ import SplashScreen from './app/assets/screens/SplashScreen';
 import path from './app/assets/components/Path';
 import { AuthContext } from './app/assets/components/context';
 import * as SecureStore from 'expo-secure-store';
+import AuthStack from './app/assets/routes/AuthStack';
+import { NavigationContainer } from '@react-navigation/native';
 
 const axios = require('axios').default;
 axios.defaults.baseURL = path();
@@ -128,8 +130,10 @@ export default function App() {
 	}
 
 	return (
-		<AuthContext.Provider value={authContext}>
-			{state.userToken == null ? <WelcomeScreen /> : <Profile />}
-		</AuthContext.Provider>
+		<NavigationContainer>
+			<AuthContext.Provider value={authContext}>
+				{state.userToken == null ? <AuthStack /> : <Profile />}
+			</AuthContext.Provider>
+		</NavigationContainer>
 	);
 }

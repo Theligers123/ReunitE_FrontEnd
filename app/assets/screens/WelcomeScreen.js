@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { AuthContext } from '../components/context';
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
 	const [username, setUsername] = useState(null);
 	const [password, setPassword] = useState(null);
 
@@ -46,7 +46,10 @@ function WelcomeScreen(props) {
 					<Text style={styles.textLocation}>Login</Text>
 				</TouchableOpacity>
 				{/* container for the register button */}
-				<TouchableOpacity style={styles.registerButton}>
+				<TouchableOpacity
+					style={styles.registerButton}
+					onPress={() => navigation.navigate('Register')}
+				>
 					<Text style={styles.textLocation}>Register</Text>
 				</TouchableOpacity>
 			</View>
