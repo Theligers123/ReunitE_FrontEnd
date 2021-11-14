@@ -8,7 +8,7 @@ import {
 	TextInput,
 	Image,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { AuthContext } from '../components/context';
 
 function ProfileScreen(props) {
@@ -17,22 +17,53 @@ function ProfileScreen(props) {
 	return (
 		<View style={styles.base}>
 			{/* title of the page */}
-			<Text style={styles.Title}>ReunitE</Text>
-			{/* section to just show the username */}
-			<Text style={styles.subHeading}>User Name</Text>
-			<View style={styles.showUserName}>
-				<Text>TheLigers</Text>
-			</View>
-			{/* section to input phone numbers */}
-			<Text style={styles.subHeading}>Phone Number</Text>
-			<TextInput style={styles.PhoneNumber} placeholder='Phone number' />
-			{/* section to look at your description */}
-			<Text style={styles.subHeading}>Description</Text>
-			<View style={styles.descriptionContainer} />
+			<Image source={require('../ReunitE1.png')} style={styles.pic} />
 
-			{/* section to look at your tags or interest */}
-			<Text style={styles.subHeading}>Tags or interest</Text>
-			<View style={styles.tagsContainer} />
+			{/* UPcontainer */}
+			<View style={styles.UPcontainer}>
+				{/* section to just show the username */}
+				<Text style={styles.usernameSubHeading}>User Name</Text>
+				<TextInput
+					placeholder='UserName'
+					style={styles.UserName}
+					textAlign={'center'}
+				/>
+				{/* section to input phone numbers */}
+				<Text style={styles.PhoneSubHeading}>Phone Number</Text>
+				<TextInput
+					placeholder='Phone number'
+					style={styles.PhoneNumber}
+					textAlign={'center'}
+				/>
+			</View>
+
+			{/* section for the profile pic */}
+			<View style={styles.profPic}>
+				{/* profile pic */}
+				<View></View>
+			</View>
+
+			{/* Description container */}
+			<View style={styles.descriptionContainer}>
+				{/* section to look at your description */}
+				<Text style={styles.DescriptionSubHeading}>Description</Text>
+				<TextInput
+					style={styles.actualDescription}
+					placeholder='Description'
+					textAlignVertical={('top', 'top')}
+				/>
+			</View>
+
+			{/* Tags Container */}
+			<View style={styles.tagsContainer}>
+				{/* section to look at your tags or interest */}
+				<Text style={styles.TagSubHeading}>Tags or interest</Text>
+				<TextInput
+					style={styles.actualTags}
+					placeholder='Tags'
+					textAlignVertical={('top', 'top')}
+				/>
+			</View>
 
 			{/* button for editing profile */}
 			<TouchableOpacity style={styles.editProfile}>
@@ -47,6 +78,24 @@ function ProfileScreen(props) {
 				<AntDesign name='logout' size={20} color='black' />
 				<Text style={styles.logOutText}>Log Out</Text>
 			</TouchableOpacity>
+
+			{/* the taskbar is the view */}
+			<View style={styles.taskbar}>
+				{/* these are the buttons on the taskbar */}
+				<TouchableOpacity>
+					<FontAwesome name='bars' size={50} color='black' />
+				</TouchableOpacity>
+				<TouchableOpacity>
+					<FontAwesome name='home' size={50} color='black' />
+				</TouchableOpacity>
+				<TouchableOpacity>
+					<Ionicons
+						name='person-circle-outline'
+						size={50}
+						color='black'
+					/>
+				</TouchableOpacity>
+			</View>
 		</View>
 	);
 }
@@ -54,47 +103,113 @@ function ProfileScreen(props) {
 const styles = StyleSheet.create({
 	base: {
 		flex: 1,
-		backgroundColor: 'grey',
+		backgroundColor: 'white',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
-	Title: {
-		width: 240,
+	profPic: {
+		backgroundColor: 'red',
+		width: 150,
 		height: 150,
-		fontSize: 70,
+		alignContent: 'center',
+		position: 'absolute',
+		left: 0,
+		top: 100,
 	},
-	subHeading: {
+	UPcontainer: {
+		backgroundColor: 'transparent',
+		width: 200,
+		height: 200,
+		alignContent: 'center',
+		position: 'absolute',
+		right: 0,
+		top: 100,
+	},
+	usernameSubHeading: {
 		width: 200,
 		height: 50,
 		fontSize: 20,
+		left: 25,
 	},
-	Username: {
+	UserName: {
 		borderColor: 'black',
 		borderWidth: 1,
-		width: 150,
+		width: '75%',
 		backgroundColor: 'white',
 		borderRadius: 20,
-		textAlign: 'center',
-	},
-	showUserName: {
-		backgroundColor: 'white',
-		borderWidth: 1,
-		borderColor: 'black',
-		borderRadius: 20,
-		width: '45%',
 		height: 30,
-		alignItems: 'center',
-		padding: 3,
+		alignContent: 'center',
+		bottom: 10,
+	},
+	PhoneSubHeading: {
+		width: 200,
+		height: 50,
+		fontSize: 20,
+		left: 10,
+		top: 14,
 	},
 	PhoneNumber: {
 		borderColor: 'black',
 		borderWidth: 1,
-		width: '45%',
+		width: '75%',
 		backgroundColor: 'white',
 		borderRadius: 20,
-		textAlign: 'center',
 		height: 30,
+		alignContent: 'center',
 	},
-	descriptionContainer: {},
-	tagsContainer: {},
+
+	descriptionContainer: {
+		backgroundColor: 'transparent',
+		width: 400,
+		height: 150,
+		alignContent: 'center',
+		alignItems: 'center',
+		position: 'relative',
+		top: 90,
+	},
+	DescriptionSubHeading: {
+		width: 200,
+		height: 50,
+		fontSize: 20,
+	},
+	actualDescription: {
+		backgroundColor: '#FDFDFD',
+		width: 350,
+		height: 70,
+		borderRadius: 7,
+		borderColor: 'black',
+		borderWidth: 1,
+		shadowColor: 'black',
+		shadowOpacity: 100,
+		shadowRadius: 5,
+		elevation: 100,
+	},
+	tagsContainer: {
+		backgroundColor: 'transparent',
+		width: 400,
+		height: 150,
+		alignContent: 'center',
+		alignItems: 'center',
+		position: 'relative',
+		top: 90,
+	},
+	TagSubHeading: {
+		width: 200,
+		height: 50,
+		fontSize: 20,
+	},
+	actualTags: {
+		backgroundColor: '#FDFDFD',
+		width: 350,
+		height: 70,
+		borderRadius: 7,
+		borderColor: 'black',
+		borderWidth: 1,
+		shadowColor: 'black',
+		shadowOpacity: 100,
+		shadowRadius: 10,
+		elevation: 100,
+	},
 	editProfile: {
 		width: '50%',
 		height: 30,
@@ -104,6 +219,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		flexDirection: 'row',
 		justifyContent: 'center',
+		bottom: -100,
 	},
 	editProfileText: {},
 	logOut: {
@@ -115,14 +231,23 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		flexDirection: 'row',
 		justifyContent: 'center',
+		bottom: -110,
 	},
 	logOutText: {},
-	logOutText: {},
-	homeButton: {},
-	profileButton: {},
-	picSize: {
-		width: 50,
+
+	taskbar: {
+		backgroundColor: '#E1E1E1',
+		flexDirection: 'row',
+		position: 'absolute',
+		bottom: 0,
+		width: 397,
+		justifyContent: 'space-evenly',
+	},
+	pic: {
+		width: 120,
 		height: 50,
+		position: 'absolute',
+		top: 30,
 	},
 });
 

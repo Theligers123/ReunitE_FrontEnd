@@ -14,7 +14,7 @@ function WelcomeScreen({ navigation }) {
 	const [username, setUsername] = useState(null);
 	const [password, setPassword] = useState(null);
 
-	const { signIn } = useContext(AuthContext);
+    const { signIn } = useContext(AuthContext);
 
 	return (
 		<View style={styles.baseBackground}>
