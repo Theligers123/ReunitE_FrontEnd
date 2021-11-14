@@ -6,6 +6,7 @@ import path from './app/assets/components/Path';
 import { AuthContext } from './app/assets/components/context';
 import * as SecureStore from 'expo-secure-store';
 import AuthStack from './app/assets/routes/AuthStack';
+import AppStack from './app/assets/routes/AppStack';
 import { NavigationContainer } from '@react-navigation/native';
 
 const axios = require('axios').default;
@@ -156,7 +157,7 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<AuthContext.Provider value={authContext}>
-				{state.userToken == null ? <AuthStack /> : <Profile />}
+				{state.userToken == null ? <AuthStack /> : <AppStack />}
 			</AuthContext.Provider>
 		</NavigationContainer>
 	);
