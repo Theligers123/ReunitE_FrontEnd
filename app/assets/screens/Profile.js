@@ -6,7 +6,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
 
-    function WelcomeScreen(props) {
+    function Profile(props) {
         return (
             <View style = {styles.base}>
                 {/* title of the page */}
@@ -274,4 +274,4 @@ import { Ionicons } from '@expo/vector-icons';
 
     })
 
-    export default WelcomeScreen;
+    export default Profile;
