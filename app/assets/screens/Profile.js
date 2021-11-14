@@ -17,14 +17,15 @@ import { Ionicons } from '@expo/vector-icons';
                 <View style = {styles.UPcontainer}>
                         {/* section to just show the username */}
                     <Text style = {styles.usernameSubHeading}>User Name</Text>
-                    <View style = {styles.showUserName}>
-                        <Text>TheLigers</Text>
-                    </View>
+                    <TextInput placeholder= "UserName" style= {styles.UserName}
+                    textAlign = {"center"}/>
                     {/* section to input phone numbers */}
                     <Text style = {styles.PhoneSubHeading}>Phone Number</Text>
-                    <TextInput placeholder= "Phone number" style= {styles.PhoneNumber}/>
+                    <TextInput placeholder= "Phone number" style= {styles.PhoneNumber}
+                    textAlign = {"center"}/>
                 </View>
-
+                
+                {/* section for the profile pic */}
                 <View style = {styles.profPic}>
                     {/* profile pic */}
                     <View>
@@ -38,14 +39,16 @@ import { Ionicons } from '@expo/vector-icons';
                 <View style = {styles.descriptionContainer}>
                         {/* section to look at your description */}
                     <Text style = {styles.DescriptionSubHeading}>Description</Text>
-                    <View style = {styles.actualDescription}/>
+                    <TextInput style = {styles.actualDescription} placeholder = "Description" 
+                    textAlignVertical = {"top","top"}/>
                 </View>
 
                 {/* Tags Container */}
                 <View style = {styles.tagsContainer}>
                         {/* section to look at your tags or interest */}
                     <Text style = {styles.TagSubHeading}>Tags or interest</Text>
-                    <View style = {styles.actualTags}/>
+                    <TextInput style = {styles.actualTags} placeholder = "Tags" 
+                    textAlignVertical = {"top","top"}/>
                 </View>
 
 
@@ -94,7 +97,7 @@ import { Ionicons } from '@expo/vector-icons';
         base: 
         {
             flex: 1,
-            backgroundColor: 'gold',
+            backgroundColor: 'white',
             justifyContent: 'center',
             alignItems:'center',
             
@@ -111,7 +114,7 @@ import { Ionicons } from '@expo/vector-icons';
         },
         UPcontainer:
         {
-            backgroundColor: 'green',
+            backgroundColor: 'transparent',
             width: 200,
             height: 200,
             alignContent:'center',
@@ -124,18 +127,19 @@ import { Ionicons } from '@expo/vector-icons';
             width: 200,
             height: 50,
             fontSize: 20,
+            left: 25,
 
         },
-        showUserName:
+        UserName:
         {
-            backgroundColor: 'white',
-            borderWidth: 1,
             borderColor: 'black',
+            borderWidth: 1,
+            width: "75%",
+            backgroundColor: 'white',
             borderRadius: 20,
-            width: '75%',
             height: 30,
-            padding: 3,
-            alignItems:'center',
+            alignContent: 'center',
+            bottom: 10
 
         },
         PhoneSubHeading:
@@ -143,6 +147,8 @@ import { Ionicons } from '@expo/vector-icons';
             width: 200,
             height: 50,
             fontSize: 20,
+            left: 10,
+            top: 14,
         },
         PhoneNumber:
         {
@@ -158,7 +164,7 @@ import { Ionicons } from '@expo/vector-icons';
 
         descriptionContainer:
         {
-            backgroundColor: 'green',
+            backgroundColor: 'transparent',
             width: 400,
             height: 150,
             alignContent:'center',
@@ -174,13 +180,20 @@ import { Ionicons } from '@expo/vector-icons';
         },
         actualDescription:
         {
-            backgroundColor: 'blue',
+            backgroundColor: '#FDFDFD',
             width: 350,
             height: 70,
+            borderRadius: 7,
+            borderColor: 'black',
+            borderWidth: 1,
+            shadowColor: 'black',
+            shadowOpacity: 100,
+            shadowRadius: 5,
+            elevation: 100,
         },
         tagsContainer:
         {
-            backgroundColor: 'green',
+            backgroundColor: 'transparent',
             width: 400,
             height: 150,
             alignContent:'center',
@@ -196,9 +209,16 @@ import { Ionicons } from '@expo/vector-icons';
         },
         actualTags:
         {
-            backgroundColor: 'blue',
+            backgroundColor: '#FDFDFD',
             width: 350,
             height: 70,
+            borderRadius: 7,
+            borderColor: 'black',
+            borderWidth: 1,
+            shadowColor: 'black',
+            shadowOpacity: 100,
+            shadowRadius: 10,
+            elevation: 100,
         },
         editProfile:
         {
@@ -237,7 +257,7 @@ import { Ionicons } from '@expo/vector-icons';
     
         taskbar:
         {
-            backgroundColor: 'gold',
+            backgroundColor: '#E1E1E1',
             flexDirection: 'row',
             position: 'absolute',
             bottom: 0,
