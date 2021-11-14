@@ -6,7 +6,7 @@ import CreateMeeting from './app/assets/screens/CreateMeeting';
 export default function App() {
     return (
       //<Profile/>
-      <WelcomeScreen/>
-      //<CreateMeeting/>
+      //<WelcomeScreen/>
+      <CreateMeeting/>
     );
   }
