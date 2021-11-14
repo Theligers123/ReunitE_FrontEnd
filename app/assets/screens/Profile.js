@@ -1,13 +1,34 @@
-import React from 'react';
 import { ImageBackground, StyleSheet, View, TouchableOpacity, 
-    Text, TextInput, Image} from 'react-native';
+    Text, TextInput, Image, ActivityIndicator, Platform, SafeAreaView,
+    Button,} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import React, { useState, useEffect } from 'react';
+import * as ImagePicker from 'expo-image-picker';
 
 
     function Profile(props) {
+
+        const [image, setImage] = useState(null);
+        const addImage = async () => {
+        let _image = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4,3],
+        quality: 1,
+        });
+
+        console.log(JSON.stringify(_image));
+
+        if (!_image.cancelled) {
+          setImage(_image.uri);
+        }
+      };
+
         return (
+
+
             <View style = {styles.base}>
                 {/* title of the page */}
                 <Image source = {require('../ReunitE1.png')} 
@@ -26,12 +47,19 @@ import { Ionicons } from '@expo/vector-icons';
                 </View>
                 
                 {/* section for the profile pic */}
-                <View style = {styles.profPic}>
                     {/* profile pic */}
-                    <View>
-
+                    <View style={imageUploaderStyles.container}>
+                    {
+                    image  && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+                    }
+                    
+                    <View style={imageUploaderStyles.uploadBtnContainer}>
+                        <TouchableOpacity onPress={addImage} style={imageUploaderStyles.uploadBtn} >
+                            <Text>{image ? 'Edit' : 'Upload'} Image</Text>
+                            <AntDesign name="camera" size={20} color="black" />
+                        </TouchableOpacity>
                     </View>
-                </View>
+            </View>
                 
 
 
@@ -89,6 +117,33 @@ import { Ionicons } from '@expo/vector-icons';
             </View>
         );
     }
+
+    const imageUploaderStyles=StyleSheet.create({
+        container:{
+            elevation:2,
+            height:150,
+            width:150, 
+            backgroundColor:'#efefef',
+            position:'relative',
+            borderRadius:999,
+            overflow:'hidden',
+            right:95
+        },
+        uploadBtnContainer:{
+            opacity:0.7,
+            position:'absolute',
+            right:0,
+            bottom:0,
+            backgroundColor:'lightgrey',
+            width:'100%',
+            height:'25%',
+        },
+        uploadBtn:{
+            display:'flex',
+            alignItems:"center",
+            justifyContent:'center'
+        }
+    })
 
 
 
@@ -170,7 +225,7 @@ import { Ionicons } from '@expo/vector-icons';
             alignContent:'center',
             alignItems: 'center',
             position: 'relative',
-            top: 90,
+            top: 40,
         },
         DescriptionSubHeading:
         {
@@ -199,7 +254,7 @@ import { Ionicons } from '@expo/vector-icons';
             alignContent:'center',
             alignItems: 'center',
             position: 'relative',
-            top: 90,
+            top: 40,
         },
         TagSubHeading:
         {
@@ -230,7 +285,7 @@ import { Ionicons } from '@expo/vector-icons';
             alignItems: 'center',
             flexDirection: 'row',
             justifyContent: 'center',
-            bottom: -100
+            top: 70
 
         },
         editProfileText:
