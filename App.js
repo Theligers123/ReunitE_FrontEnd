@@ -5,6 +5,8 @@ import SplashScreen from './app/assets/screens/SplashScreen';
 import path from './app/assets/components/Path';
 import { AuthContext } from './app/assets/components/context';
 import * as SecureStore from 'expo-secure-store';
+import AuthStack from './app/assets/routes/AuthStack';
+import { NavigationContainer } from '@react-navigation/native';
 
 const axios = require('axios').default;
 axios.defaults.baseURL = path();
@@ -87,13 +89,37 @@ export default function App() {
 				});
 			},
 			signUp: async (data) => {
+				let token = null;
+
 				// send user data to server and get token
-				// handle errors
+				try {
+					const res = await axios.post('auth/register', {
+						username: data.username,
+						password: data.password,
+						phoneNumber: data.phoneNumber,
+					});
+					if (res.data.status != 'success') {
+						return;
+					}
+
+					// FIXME: i don't understand why accessToken needs to be there twice
+					token = res.data.accessToken.accessToken;
+				} catch (err) {
+					console.log(err);
+					return;
+				}
+
 				// persist token using securestore
+				try {
+					await SecureStore.setItemAsync('userToken', token);
+				} catch (err) {
+					console.log(err);
+					return;
+				}
 
 				dispatch({
 					type: 'SIGN_IN',
-					token: 'sample_token',
+					token: token,
 				});
 			},
 		}),
@@ -128,8 +154,10 @@ export default function App() {
 	}
 
 	return (
-		<AuthContext.Provider value={authContext}>
-			{state.userToken == null ? <WelcomeScreen /> : <Profile />}
-		</AuthContext.Provider>
+		<NavigationContainer>
+			<AuthContext.Provider value={authContext}>
+				{state.userToken == null ? <AuthStack /> : <Profile />}
+			</AuthContext.Provider>
+		</NavigationContainer>
 	);
 }
