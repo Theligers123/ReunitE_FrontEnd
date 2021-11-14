@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	ScrollView,
 	StyleSheet,
@@ -14,52 +14,63 @@ import { Feather } from '@expo/vector-icons';
 import path from '../components/Path';
 import { getEventsNearMe, getEventInfo } from '../components/GetEventsNearMe';
 
-var events = null;
-
 function ExploreScreen(props) {
-	(async () => {
-		events = await getEventsNearMe(-1, []);
-	})();
+	const [events, setEvents] = useState(null);
+	const [done, setDone] = useState(null);
 
+	useEffect(() => {
+		async function checkData() {
+			const data = await getEventsNearMe(-1, []);
+			setEvents(data);
+		}
+		checkData();
+		console.log(events);
+		setDone(true);
+	}, []);
+	console.log(events);
 	return (
 		<View style={styles.container}>
 			<View>
 				<TextInput style={styles.searchBox} />
 			</View>
 			<Text>Events Near Me</Text>
-			<FlatList
-				horizontal={true}
-				data={events}
-				keyExtractor={(item) => item.eventID}
-				renderItem={({ item }) => {
-					return (
-						<View>
-							<TouchableOpacity>
-								<Image
-									source={require('../sample-event-photos/photo-2.jpeg')}
-									style={{
-										width: 150,
-										height: 150,
-										marginRight: 8,
-										borderRadius: 10,
-									}}
-								/>
-								<View style={{ flexDirection: 'row' }}>
-									<Feather
-										style={styles.imageLocationIcon}
-										name='map-pin'
-										size={16}
-										color='white'
+			{done ? (
+				<FlatList
+					horizontal={true}
+					data={events}
+					keyExtractor={(item) => item.eventID}
+					renderItem={({ item }) => {
+						return (
+							<View>
+								<TouchableOpacity>
+									<Image
+										source={require('../sample-event-photos/photo-2.jpeg')}
+										style={{
+											width: 150,
+											height: 150,
+											marginRight: 8,
+											borderRadius: 10,
+										}}
 									/>
-									<Text style={styles.imageText}>
-										{item.eventName}
-									</Text>
-								</View>
-							</TouchableOpacity>
-						</View>
-					);
-				}}
-			/>
+									<View style={{ flexDirection: 'row' }}>
+										<Feather
+											style={styles.imageLocationIcon}
+											name='map-pin'
+											size={16}
+											color='white'
+										/>
+										<Text style={styles.imageText}>
+											{item.eventName}
+										</Text>
+									</View>
+								</TouchableOpacity>
+							</View>
+						);
+					}}
+				/>
+			) : (
+				<Text>Loading</Text>
+			)}
 		</View>
 	);
 }
