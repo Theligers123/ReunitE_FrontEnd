@@ -8,11 +8,16 @@ import * as SecureStore from 'expo-secure-store';
 import AuthStack from './app/assets/routes/AuthStack';
 import AppStack from './app/assets/routes/AppStack';
 import { NavigationContainer } from '@react-navigation/native';
+import { Platform, Text, View, StyleSheet } from 'react-native';
+import * as Location from 'expo-location';
 
 const axios = require('axios').default;
 axios.defaults.baseURL = path();
 
 export default function App() {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
 	const [state, dispatch] = useReducer(
 		(prevState, action) => {
 			switch (action.type) {
@@ -128,6 +133,24 @@ export default function App() {
 	);
 
 	useEffect(() => {
+    const promptUserToAllowLocation = async () => {
+      if (Platform.OS === 'android' && !Constants.isDevice) {
+        setErrorMsg(
+          'Oops, this will not work on Snack in an Android emulator. Try it on your device!'
+        );
+        return;
+      }
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      console.log(status);
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    };
+
 		const checkStorage = async () => {
 			let userToken;
 
@@ -145,7 +168,7 @@ export default function App() {
 				token: userToken,
 			});
 		};
-
+    promptUserToAllowLocation();
 		checkStorage();
 	}, []);
 
@@ -153,7 +176,6 @@ export default function App() {
 		// We haven't finished checking for the token yet
 		return <SplashScreen />;
 	}
-
 	return (
 		<NavigationContainer>
 			<AuthContext.Provider value={authContext}>
