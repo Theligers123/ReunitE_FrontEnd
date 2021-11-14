@@ -64,12 +64,12 @@ export default function App() {
 					}
 
 					// FIXME: i don't understand why accessToken needs to be there twice
-					token = res.data.accessToken.accessToken;
+					token = res.data.accessToken;
 				} catch (err) {
 					console.log(err);
 					return;
 				}
-
+				console.log(token + ' sdfjkasfjalsdjfl;asjdfla;sjdf;lk\n\n\n');
 				// persist the token using secure store
 				try {
 					await SecureStore.setItemAsync('userToken', token);
