@@ -78,24 +78,6 @@ function ProfileScreen(props) {
 				<AntDesign name='logout' size={20} color='black' />
 				<Text style={styles.logOutText}>Log Out</Text>
 			</TouchableOpacity>
-
-			{/* the taskbar is the view */}
-			<View style={styles.taskbar}>
-				{/* these are the buttons on the taskbar */}
-				<TouchableOpacity>
-					<FontAwesome name='bars' size={50} color='black' />
-				</TouchableOpacity>
-				<TouchableOpacity>
-					<FontAwesome name='home' size={50} color='black' />
-				</TouchableOpacity>
-				<TouchableOpacity>
-					<Ionicons
-						name='person-circle-outline'
-						size={50}
-						color='black'
-					/>
-				</TouchableOpacity>
-			</View>
 		</View>
 	);
 }
