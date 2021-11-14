@@ -8,7 +8,7 @@ import {
 	TextInput,
 	Image,
 } from 'react-native';
-import { AuthContext } from '../components/context';
+import { AuthContext } from '../components/context.js';
 
 function WelcomeScreen({ navigation }) {
 	const [username, setUsername] = useState(null);

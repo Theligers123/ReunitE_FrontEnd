@@ -51,6 +51,8 @@ function ProfileScreen(props) {
 					style={styles.actualDescription}
 					placeholder='Description'
 					textAlignVertical={('top', 'top')}
+					multiline={true}
+        			numberOfLines={4}
 				/>
 			</View>
 
@@ -62,6 +64,8 @@ function ProfileScreen(props) {
 					style={styles.actualTags}
 					placeholder='Tags'
 					textAlignVertical={('top', 'top')}
+					multiline={true}
+        			numberOfLines={4}
 				/>
 			</View>
 
