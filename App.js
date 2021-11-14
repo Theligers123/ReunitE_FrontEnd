@@ -2,7 +2,7 @@ import React, { useState, useReducer, useMemo, useEffect } from 'react';
 import WelcomeScreen from './app/assets/screens/WelcomeScreen';
 import Profile from './app/assets/screens/ProfileScreen';
 import SplashScreen from './app/assets/screens/SplashScreen';
-import path from './app/assets/components/path';
+import path from './app/assets/components/Path';
 import { AuthContext } from './app/assets/components/context';
 import * as SecureStore from 'expo-secure-store';
 

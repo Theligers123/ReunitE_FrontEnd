@@ -42,7 +42,7 @@ function ProfileScreen(props) {
 			</TouchableOpacity>
 
 			{/* button for loging out */}
-			<TouchableOpacity style={styles.logOut}>
+			<TouchableOpacity style={styles.logOut} onPress={() => signOut()}>
 				{/* icon editing    */}
 				<AntDesign name='logout' size={20} color='black' />
 				<Text style={styles.logOutText}>Log Out</Text>
