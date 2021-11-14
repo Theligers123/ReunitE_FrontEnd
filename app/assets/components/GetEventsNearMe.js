@@ -41,7 +41,7 @@ export async function getEventsNearMe(distance, tags) {
 	} finally {
 		// console.log(eventsIDs);
 		const eventsData = await getEventInfo(eventsIDs);
-		// console.log(eventsData);
+		return eventsData;
 	}
 }
 

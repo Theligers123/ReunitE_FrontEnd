@@ -24,10 +24,11 @@ function ExploreScreen(props) {
 			setEvents(data);
 		}
 		checkData();
-		console.log(events);
+		console.log(events + ' HIV');
 		setDone(true);
 	}, []);
-	console.log(events);
+	console.log(events + ' AIDS');
+
 	return (
 		<View style={styles.container}>
 			<View>
@@ -36,17 +37,18 @@ function ExploreScreen(props) {
 			<Text>Events Near Me</Text>
 			{done ? (
 				<FlatList
-					horizontal={true}
+					horizontal={false}
 					data={events}
 					keyExtractor={(item) => item.eventID}
 					renderItem={({ item }) => {
 						return (
 							<View>
-								<TouchableOpacity>
+								<TouchableOpacity style={{ padding: 5 }}>
 									<Image
 										source={require('../sample-event-photos/photo-2.jpeg')}
 										style={{
-											width: 150,
+											alignSelf: 'center',
+											width: '90%',
 											height: 150,
 											marginRight: 8,
 											borderRadius: 10,
@@ -104,13 +106,13 @@ const styles = StyleSheet.create({
 	imageLocationIcon: {
 		position: 'absolute',
 		marginTop: 4,
-		left: 10,
+		left: 20,
 		bottom: 10,
 	},
 	imageText: {
 		position: 'absolute',
 		marginTop: 4,
-		left: 30,
+		left: 40,
 		bottom: 10,
 		fontSize: 14,
 		color: 'white',
